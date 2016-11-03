@@ -15,9 +15,11 @@ public class ContactMeGui extends JFrame
 	private JTextField emailTF, messageTF, completeNameTF;
 	private JTextField passwordTF,reEnterPassTF;
 	private JButton sendB, exitB, clearB;
-
+	private JRadioButton genderFemale, genderMale;
+	private ButtonGroup gender = new ButtonGroup();
 	private SendButtonHandler sbHandler;
 	private ExitButtonHandler ebHandler;
+	private ClearButtonHandler cbHandler;
 
 	private JMenuBar  menuBar;
 	private JMenu make;
@@ -33,6 +35,8 @@ public class ContactMeGui extends JFrame
 		reEnterPassL= new JLabel("Re-enter Password: ", SwingConstants.CENTER);
 		messageL = new JLabel("Addtional Info: ", SwingConstants.CENTER);
 		completeNameL = new JLabel("Complete Name: ", SwingConstants.CENTER);
+		
+		
 		
 		completeNameTF = new JTextField();
 		emailTF = new JTextField();
@@ -50,6 +54,8 @@ public class ContactMeGui extends JFrame
 		exitB.addActionListener(ebHandler);
 
 		clearB = new JButton("Clear");
+		cbHandler = new ClearButtonHandler();
+		clearB.addActionListener(cbHandler);
 
 
 		menuBar = new JMenuBar();
@@ -63,10 +69,17 @@ public class ContactMeGui extends JFrame
 		make.add(byFax);
 		make.add(byPhone);
 		make.add(byMail);
+		
+		genderFemale = new JRadioButton("Female");
+		genderMale = new JRadioButton("Male");
+		
+		
+		gender.add(genderFemale);
+		gender.add(genderMale);
 
 		setTitle("Registration Form");
 		Container pane = getContentPane();
-		pane.setLayout(new GridLayout(7, 3));
+		pane.setLayout(new GridLayout(8, 3));
 
 		//Add things to the pane in the order you want them to appear (left to right, top to bottom)
 		pane.add(completeNameL);
@@ -79,7 +92,9 @@ public class ContactMeGui extends JFrame
 		pane.add(reEnterPassTF);
 		pane.add(messageL);
 		pane.add(messageTF);
-
+		pane.add(genderFemale);
+		pane.add(genderMale);
+		
 		pane.add(menuBar);
 
 		pane.add(clearB);
@@ -152,6 +167,21 @@ public class ContactMeGui extends JFrame
 		public void actionPerformed(ActionEvent e)
 		{
 			System.exit(0);
+		}
+	}
+	public class ClearButtonHandler implements ActionListener
+	{
+		public void actionPerformed(ActionEvent e)
+		{
+	
+						
+				completeNameTF.setText("");
+				emailTF.setText("");
+				passwordTF.setText("");
+				reEnterPassTF.setText("");
+				messageTF.setText("");
+				gender.clearSelection();
+			
 		}
 	}
 
